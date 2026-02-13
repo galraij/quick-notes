@@ -1,6 +1,7 @@
 
 import { useState } from "react";
 import AddNote from "./components/AddNote";
+import NoteComponent from "./components/NoteComponent";
 
 export default function App() {
   const [notes, setNotes] = useState([]);
@@ -17,9 +18,32 @@ export default function App() {
   }
 
   return (
+   <> 
     <div>
       <AddNote onAdd={addNote} />
     </div>
+
+  <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(3, 1fr)",
+          gap: "12px",
+          marginTop: "20px",
+        }}
+      >
+        {notes.map((note) => {
+          return (
+            <NoteComponent
+              key={note.id}
+              noteDate={note.createdAt}
+              noteTitle={note.title}
+              textArea={note.text}
+            />
+          );
+        })}
+      </div>
+    
+</>
   );
 }
 

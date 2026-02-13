@@ -39,7 +39,7 @@ export default function AddNote({ onAdd }) {
       </div>
 
       <div style={{ marginTop: "10px" }}>
-        <button onClick={handleAddClick}>Add note</button>
+        <button type="button" onClick={handleAddClick}>Add note</button>
       </div>
     </div>
   );
