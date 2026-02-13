@@ -1,30 +1,46 @@
 import { useState } from "react";
 
-function AddNote({ notes, setNotes }) {
-  const [text, setText] = useState("");
+export default function AddNote({ onAdd }) {
 
-  function addNote() {
-    const newNote = {
-      id: Date.now(),
-      content: text,
-    };
+  const [noteTitle, setNoteTitle] = useState("");
+  const [textArea, setTextArea] = useState("");
+
+  function handleAddClick() {
+
+
+    onAdd(noteTitle, textArea);
+
+    setNoteTitle("");
+    setTextArea("");
   }
 
-  setNotes([...notes, newNote]);
-  setText("");
-};
+  return (
+    <div>
+      <h2>AddNote</h2>
 
-return (
-  <div>
-    <input
-      type="text"
-      value={text}
-      onChange={(e) => setText(e.target.value)}
-      placeholder="Type note"
-    />
-    <button onClick={addNote}>Add note</button>
-  </div>
-);
+      <div>
+        <h3>Title:</h3>
+        <input
+          type="text"
+          value={noteTitle}
+          onChange={(e) => setNoteTitle(e.target.value)}
+        />
+      </div>
+
+      <div style={{ marginTop: "10px" }}>
+        <h2>Body: </h2>
+        <br />
+        <textarea
+          rows={5}
+          value={textArea}
+          onChange={(e) => setTextArea(e.target.value)}
+
+        />
+      </div>
+
+      <div style={{ marginTop: "10px" }}>
+        <button onClick={handleAddClick}>Add note</button>
+      </div>
+    </div>
+  );
 }
-
-export default AddNote;
